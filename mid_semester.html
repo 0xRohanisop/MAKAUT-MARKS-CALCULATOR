@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SGPA to Average Grade and Overall Percentage Converter</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>SGPA to Average Grade and Overall Percentage Converter</h1>
+    <div>
+        <label for="numSemesters">Select Number of Semesters:</label>
+        <select id="numSemesters">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+    </div>
+    <div id="semesterInputs"></div>
+    <button onclick="calculate()">Calculate</button>
+    <button onclick="resetInputs()">Reset</button>
+    <div id="result"></div>
+</div>
+<script>
+    function calculate() {
+    var numSemesters = parseInt(document.getElementById("numSemesters").value);
+    var totalSGPA = 0;
+
+    for (var i = 1; i <= numSemesters; i++) {
+        var sgpa = parseFloat(document.getElementById("sgpa_" + i).value);
+
+        if (isNaN(sgpa) || sgpa < 0 || sgpa > 10) {
+            document.getElementById("result").textContent = "Please enter valid SGPA for all semesters.";
+            return;
+        }
+
+        totalSGPA += sgpa;
+    }
+
+    var averageSGPA = totalSGPA / numSemesters;
+    var overallPercentage = (averageSGPA - 0.75) * 10;
+
+    document.getElementById("result").textContent = "Average SGPA: " + averageSGPA.toFixed(2) + ", Overall Percentage: " + overallPercentage.toFixed(2) + "%";
+}
+
+function resetInputs() {
+    var numSemesters = parseInt(document.getElementById("numSemesters").value);
+    
+    for (var i = 1; i <= numSemesters; i++) {
+        document.getElementById("sgpa_" + i).value = "";
+    }
+
+    document.getElementById("result").textContent = "";
+}
+
+document.getElementById("numSemesters").addEventListener("change", function() {
+    var numSemesters = parseInt(this.value);
+    var semesterInputsContainer = document.getElementById("semesterInputs");
+    semesterInputsContainer.innerHTML = "";
+
+    for (var i = 1; i <= numSemesters; i++) {
+        var labelSgpa = document.createElement("label");
+        labelSgpa.textContent = "SGPA for Semester " + i + ":";
+        semesterInputsContainer.appendChild(labelSgpa);
+
+        var inputSgpa = document.createElement("input");
+        inputSgpa.type = "number";
+        inputSgpa.id = "sgpa_" + i;
+        inputSgpa.placeholder = "Enter SGPA for Semester " + i;
+        semesterInputsContainer.appendChild(inputSgpa);
+
+        semesterInputsContainer.appendChild(document.createElement("br"));
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGPA/YGPA to Percentage Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="converter-container">
+        <h2>SGPA/YGPA to Percentage Converter</h2>
+        <div>
+            <label for="sgpa">SGPA:</label>
+            <input type="number" id="sgpa" placeholder="Enter SGPA" step="0.01">
+            <label for="ygpa">YGPA:</label>
+            <input type="number" id="ygpa" placeholder="Enter YGPA" step="0.01">
+        </div>
+        <div>
+            <button id="sgpaButton">Convert SGPA</button>
+            <button id="ygpaButton">Convert YGPA</button>
+            <button id="resetButton">Reset</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
