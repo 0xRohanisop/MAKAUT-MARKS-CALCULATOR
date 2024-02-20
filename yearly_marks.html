@@ -26,6 +26,46 @@
     <button onclick="calculate()">Calculate</button>
     <div id="result"></div>
 </div>
-<script src="script.js"></script>
+<script>
+
+    function convert(value) {
+
+        if (isNaN(value) || value < 0 || value > 10) {
+            resultDisplay.textContent = "Please enter a valid " + type.toUpperCase() + " between 0 and 10.";
+            return;
+        }
+
+        var percentage = (value - 0.75) * 10;
+        percentage = Math.max(percentage, 0);
+        percentage = Math.min(percentage, 100);
+
+        return percentage;
+    }
+
+    function calculate() {
+        var oddSemSGPA = parseFloat(document.getElementById("oddSemSGPA").value);
+        var oddSemSubjects = parseInt(document.getElementById("oddSemSubjects").value);
+        var evenSemSGPA = parseFloat(document.getElementById("evenSemSGPA").value);
+        var evenSemSubjects = parseInt(document.getElementById("evenSemSubjects").value);
+
+        if (isNaN(oddSemSGPA) || oddSemSGPA < 0 || oddSemSGPA > 10 || isNaN(oddSemSubjects) || oddSemSubjects <= 0 ||
+            isNaN(evenSemSGPA) || evenSemSGPA < 0 || evenSemSGPA > 10 || isNaN(evenSemSubjects) || evenSemSubjects <= 0) {
+            document.getElementById("result").textContent = "Please enter valid input values.";
+            return;
+        }
+        let totalMarks = (oddSemSubjects + evenSemSubjects) * 100;
+
+        let oddSemPercentage = convert(oddSemSGPA);
+        let evenSemPercentage = convert(evenSemSGPA);
+        var ygpa = (oddSemSGPA + evenSemSGPA) / 2;
+        var obtainedMarks = (oddSemSGPA * oddSemSubjects * 100) + (evenSemSGPA * evenSemSubjects * 100);
+        var overallPercentage = (oddSemPercentage + evenSemPercentage) * 0.5;
+
+        document.getElementById("result").innerHTML = "YGPA: " + ygpa.toFixed(2) + "<br>" +
+            "Total Marks: " + totalMarks.toFixed(2) + "<br>" +
+            "Your Obtained Marks: " + obtainedMarks.toFixed(2) + "<br>" +
+            "Overall Percentage: " + overallPercentage.toFixed(2) + "%";
+    }
+</script>
 </body>
 </html>
