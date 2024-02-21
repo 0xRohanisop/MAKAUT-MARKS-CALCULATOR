@@ -65,12 +65,13 @@
         let oddSemPercentage = convert(oddSemSGPA);
         let evenSemPercentage = convert(evenSemSGPA);
         var ygpa = (oddSemSGPA + evenSemSGPA) / 2;
-        var obtainedMarks = (oddSemSGPA * oddSemSubjects * 100) + (evenSemSGPA * evenSemSubjects * 100);
         var overallPercentage = (oddSemPercentage + evenSemPercentage) * 0.5;
+        var obtainedMarks = (overallPercentage * totalMarks) / 100;
+        
 
         document.getElementById("result").innerHTML = "YGPA: " + ygpa.toFixed(2) + "<br>" +
             "Total Marks: " + totalMarks.toFixed(2) + "<br>" +
-            "Your Obtained Marks: " + obtainedMarks.toFixed(2) + "<br>" +
+            "Obtained Marks: " + obtainedMarks.toFixed(2) + "<br>" +
             "Overall Percentage: " + overallPercentage.toFixed(2) + "%";
     }
 </script>
